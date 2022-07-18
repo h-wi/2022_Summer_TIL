@@ -1,8 +1,8 @@
 # TIL
 * Python 학습서 : 박응용, 점프 투 파이썬(2019)
-* Springboot 학습서 : 이동욱, 스프링 부트와 AWS로 혼자 구현하는 웹 서비스(2019)
+~~* Springboot 학습서 : 이동욱, 스프링 부트와 AWS로 혼자 구현하는 웹 서비스(2019)~~
 
-백준 코딩테스트 학습(C,Python) 및 백엔드 스터디
+백준 코딩테스트 학습(C,Python) 및 ~~백엔드 스터디~~
 # 2022.07.09
 계획 
 1. VScode 및 InteliJ 설치 및 개발 환경 설정 
@@ -44,10 +44,7 @@ jcenter를 repositories에 추가하여 자동화가 용이하게 설정.
 
 매주 모임마다 각 팀원별로 일주일동안 공부한 문제 리뷰 
 
-Python 학습은 시간적 여유가 있을 때 하기로 결정함.
-(계절학기나 백엔드 구현 학습량에 대한 부담)
 
-C언어로 코딩테스트로 변경, 기존 파이썬을 학습한 조원은 파이썬으로 그대로 진행.
 백준 단계별로 풀어보기에서 풀어보고 싶은 단계 의견 수렴.
 조원별로 단계별 섹터를 나눠서 풀고 싶은 문제를 풀고 모임때마다 리뷰를 통해 함께 학습
 
@@ -64,3 +61,66 @@ C언어로 코딩테스트로 변경, 기존 파이썬을 학습한 조원은 �
 그래서 목표를 너무 크게 잡으면 중간에 포기하기 쉬우니
 
 차근차근 현실적으로 할 수 있는 목표로 수정했다.
+
+# 2022.07.18
+Python 학습 및 백준 단계별 풀이 (재귀)
+
+# Python의 자료형과 문자열 포매팅
+* Python에서의 새로운 연산
+```python
+a=4
+b=4
+a ** b #지수
+
+b=5
+a // b #나눗셈 후 소수점 버리는 연산
+
+c="Life is good"
+print(c[0:3]) #Life, 슬라이싱
+```
+
+* 문자열 수정하기
+```python
+a="Pithon"
+a[1]='y'
+
+a[:1]+'y'+a[2:] #Python
+```
+수정 불가능. 문자열은 immutable한 자료형 !
+슬라이싱을 이용한다
+
+* 문자열 포매팅
+
+포매팅=서식 서식자료형은 같지만 문법이 다른 언어와 달랐다.
+```python
+"I eat %d apples." % 3 
+"I ate %d apples. so I was sick for %d days." % (number,day)
+```
+
+* 문자열 관련 함수
+
+```python
+
+a="hobby"
+a.count('b') #2 b의 개수 반환
+
+a="Python is best choice"
+a.find('b') #10 b가 처음 나온 위치(index) 반환
+a.find('k') #-1 해당 값이 없으면 -1을 반환
+a.index('k') # 해당 값이 없으면 오류 발생
+
+a=","
+a.join("abcd") #'a,b,c,d'
+
+a="hi"
+a.upper() # HI
+a.lower() # hi
+
+a="Life is too short"
+a.replace("Life","Your leg") # Your leg is too short
+
+a.split() # 공백을 기준으로 문자열 나누기 (Your,leg,is..)
+a="a:b:c:d"
+a.split(:) # : 기호를 기준으로 문자열 나누기(a,b,c,d)
+```
+
