@@ -8,7 +8,7 @@
 계획 
 1. VScode 및 InteliJ 설치 및 개발 환경 설정 
 2. 코딩테스트 학습 계획 수립
-* VScode C언어 구동환경 설정
+## VScode C언어 구동환경 설정
 <img width="909" alt="image" src="https://user-images.githubusercontent.com/108285793/178094310-eca3e196-3a1c-4f98-aef8-fe02d5508f65.png">
 참고 : https://evandde.github.io/vscode-cpp/
 
@@ -41,7 +41,7 @@ jcenter를 repositories에 추가하여 자동화가 용이하게 설정.
 <img width="685" alt="image" src="https://user-images.githubusercontent.com/108285793/178094893-875ca4c9-b9e0-4bad-818e-8ec61f09f3ee.png">
 그레이들 버전 또한 4.x 버전으로 변경 완료.
 
-* 코딩테스트 학습 계획 수립
+## 코딩테스트 학습 계획 수립
 
 매주 모임마다 각 팀원별로 일주일동안 공부한 문제 리뷰 
 
@@ -66,7 +66,7 @@ jcenter를 repositories에 추가하여 자동화가 용이하게 설정.
 # 2022.07.18
 Python 학습 및 백준 단계별 풀이 (재귀)
 
-* Python의 자료형과 문자열 포매팅
+## Python의 자료형과 문자열 포매팅
 * Python에서의 새로운 연산
 ```python
 a=4
