@@ -212,4 +212,46 @@ void stars(int n)
 Python 학습 및 백준 문제 풀이 (재귀~브루트포스)
 ## 2447 나머지 풀기
 
+이중 for문과 재귀를 같이 사용하니 n(=27,81..)이 커질 때 시간이 너무 오래걸렸다.
 
+규칙성을 찾으니 배열을 쓸 필요가 없었다. 별 찍기 문제는 규칙성을 찾는게 가장 중요한듯
+
+구글링으로 공백이 나오는 지점의 규칙성을 파악하니 쉽게 풀렸다.
+
+```C
+//참고 : https://hou27.tistory.com/entry/BaekjoonC%EC%96%B8%EC%96%B4-2447%EB%B2%88-%EB%B3%84%EC%B0%8D%EA%B8%B0-10
+#include <stdio.h>
+
+void stars(int i,int j,int n)
+{
+   if((i/n)%3==1&&(j/n)%3==1)
+   {
+        printf(" ");
+   }
+   else
+   {
+        if (n/3==0)
+            printf("*");
+        else 
+        {
+            stars(i,j,n/3);
+        }
+   }
+}
+
+int main()
+{
+    int n=0;
+    scanf("%d",&n);
+
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+        {
+            stars(i,j,n);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
