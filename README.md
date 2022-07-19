@@ -178,5 +178,38 @@ int main()
 
 3x3 패턴으로 계속 이어 붙일려고 했지만 행으로 이어 붙이는 방법을 찾지 못했다.
 
+<img width="389" alt="image" src="https://user-images.githubusercontent.com/108285793/179714442-48f86845-a084-4596-b98b-73450913ada1.png">
+<img width="176" alt="image" src="https://user-images.githubusercontent.com/108285793/179714589-d588eda5-d105-4342-8dd8-ed90f62923ed.png">
+
+```C
+void stars(int n)
+{
+    int i,j=1;
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            if(i>(n/3)&&i<=n-(n/3)&&
+                 j>(n/3)&&j<=n-(n/3))
+            {
+                printf(" ");
+                continue;
+            }
+            if(n==3)
+                printf("*");
+            else 
+                stars(n/3);
+        }
+        printf("\n");
+    }
+}
+```
+~~삽질~~
+
 동적 할당으로 배열을 만들고 이중 for문으로 출력하는 게 나을 듯.
+
+# 2022.07.19
+Python 학습 및 백준 문제 풀이 (재귀~브루트포스)
+## 2447 나머지 풀기
+
 
