@@ -209,7 +209,6 @@ void stars(int n)
 동적 할당으로 배열을 만들고 이중 for문으로 출력하는 게 나을 듯.
 
 # 2022.07.19
-Python 학습 및 백준 문제 풀이 (재귀~브루트포스)
 ## 2447 나머지 풀기
 
 이중 for문과 재귀를 같이 사용하니 n(=27,81..)이 커질 때 시간이 너무 오래걸렸다.
@@ -255,3 +254,76 @@ int main()
     return 0;
 }
 ```
+# 2022.07.20
+
+* 모각소 2주차 모임 *
+
+Python 문법 배우기 및 백준 브루트 포스 알고리즘 문제 풀기
+
+## 블랙잭(2798), 분해합(2231)
+```C
+#include <stdio.h>
+// 브루트 포스, 블랙잭(2798)
+int main()
+{
+    int len,n=0;
+    scanf("%d %d",&len,&n);
+    int cards[len];
+    for(int i=0;i<len;i++)
+    {
+        scanf("%d",&cards[i]);
+    }
+
+    int max=0;
+    int sum=0;
+    for(int i=0;i<len-2;i++) //3개의 카드의 경우의 수를 계산하므로 처음부터 뒤에서 2번째까지
+    {
+        for(int j=i+1;j<len-1;j++) // i 다음 번의 index부터 뒤에서 1번째까지 탐색
+        {
+            for(int k=j+1;k<len;k++) // j 다음 번의 index부터 끝까지
+            {
+                sum=cards[i]+cards[j]+cards[k];
+                if(sum>max && sum<=n) //입력된 수보다 작은 값만 max에 대입
+                    max = sum;
+            }
+        }
+    }
+    printf("%d\n",max);
+    return 0;
+}
+```
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    char n[7];
+    scanf("%s",n);  //문자열로 정수를 입력받아 자릿수 파악 빠르게
+
+    int sum=0; int tmp;
+    int len=strlen(n); //strlen 함수 사용
+    int min=__INT_MAX__;
+
+    for(int i=0;i<atoi(n);i++) //0부터 분해합 전까지 경우의 수 계산
+    {
+        sum += i; 
+        tmp=i;
+        while(tmp!=0) //i의 각 자릿수를 덧셈해주는 반복문
+        {
+            sum += tmp%10; 
+            tmp = tmp/10;
+        }
+        if (sum==atoi(n)&&sum<min) //sum이 입력값과 같고 min보다 작다면
+            min = i;
+        sum = 0;
+    }
+    if(min==__INT_MAX__) // 생성자가 없는 경우
+        printf("0\n");
+    else        
+        printf("%d\n",min);
+    return 0;
+}
+```
+## Python 문법 학습
