@@ -375,8 +375,48 @@ a.pop(1) # a[1]의 요소를 반환 후 제거
 ```
 
 ### 튜플(tuple)
+1. 튜플은 요소 값을 변경할 수 없다.
+2. 이외에는 리스트와 동일한 특성을 가진다.
 
-### 딕셔너리 (dict)
+```Python
+t1= (1,2,'a','b') #튜플은 소괄호로 표시한다.
+t1[1:] #(2,'a','b')
+```
+### 딕셔너리 (dict) aka 해싱(hashing)
+1. key와 value를 한 쌍으로 갖는다.
+2. 순차적으로 요소값을 구하지 않고 'Key'를 통해 요소값을 구한다.
+(not sequantial)
+3. key값은 중복될 수 없으며 바뀔 수 없다 -> 리스트는 key값으로 쓸 수 없으나 튜플은 가능.
 
+*딕셔너리의 추가,삭제
+```Python
+a={1:'a'}
+
+a[2]='b' 
+#딕셔너리 a에 2:'b' 한 쌍을 추가 
+a={2:'b',1:'a'}
+
+del a[1]
+#딕셔너리 a에 있는 key가 1인 요소를 삭제(indexing 아님)
+a={2:'b'}
+```
+*딕셔너리 관련 함수
+```Python
+a={'name':'pey','phone':'0119993323', 'birth':'1118'}
+
+a.keys() #딕셔너리 a의 key들을 dict_keys()로 리턴
+          #dict_keys(['name','phone','birth'])
+list(a.keys()]  #딕셔너리 a의 키들을 리스트 자료형으로 리턴
+                #['name','phone','birth']
+
+a.values() #딕셔너리 a의 value들을 dict_values()로 리턴
+a.items() #딕셔너리 a의 key,value 쌍을 튜플로 묶은 값은 dict_items()로 리턴
+          #dict_items([('name','pey'),('phone','0119993323'),('birth','1118')])
+
+a.get(x) #딕셔너리 a에 x의 value를 반환, 없으면 none을 리턴
+a[x] #딕셔너리 a에 x의 value를 반환, 없으면 컴파일 오류 발생
+
+'name' in a # 딕셔너리 a에 'name'이라는 key가 있으면 true를 리턴, 없으면 false를 리턴.
+```
 ### 집합 (set)
 
