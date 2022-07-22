@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 int main()
 {
@@ -12,7 +11,7 @@ int main()
     int len=strlen(n);
     int min=__INT_MAX__;
 
-    for(int i=0;i<(int)pow(10,len);i++)
+    for(int i=0;i<atoi(n);i++)
     {
         sum += i;
         tmp=i;
