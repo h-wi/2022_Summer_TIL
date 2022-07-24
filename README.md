@@ -458,3 +458,124 @@ t1 = tuple(s1) # 튜플로 변환, (1,2,3)
   
 => 난이도가 높은 자바 스프링부트는 다음으로 미루고 파이썬과 알고리즘으로 다음 학기를 대비하는 것으로 학습 목표를 변경했다.
 <hr/>
+
+# 2022.07.24
+Python 자료형 예제 정리 및 백준 단계별 풀어보기 정렬 문제 
+## 수 정렬하기1 (#2750)
+시간 복잡도가 O(n^2)인 알고리즘을 통해 정렬하는 문제.
+
+시간 복잡도가 n^2이므로 이중 루프를 사용한다. 안쪽 반복문에서 이웃 요소끼리 반복 비교와 스왑으로 가장 큰 수를 찾고 가장 큰 수가 뒤로 간다고 생각하면 된다.
+
+n의 크기가 작을 땐 (<1000?) 이 알고리즘을 써도 큰 차이는 없다.
+```C
+#include <stdio.h>
+
+int main()
+{
+    int size,tmp=0;
+    scanf("%d",&size);
+
+    int num[size];
+    for(int i=0; i<size; i++)
+    {
+        scanf("%d",&num[i]);
+    }
+
+    for(int i=0; i<size-1; i++) //두개씩 비교하므로 size-1까지 인덱싱
+    {
+        for (int j=0; j<size-1-i; j++)
+        {
+            if(num[j]>num[j+1]){
+            tmp = num[j+1];
+            num[j+1] = num[j];
+            num[j] = tmp; //swap
+            }
+        }
+        
+    }
+
+    for(int i=0; i<size; i++)
+    {
+        printf("%d\n",num[i]);
+    }
+
+    return 0;
+}
+```
+## 수 정렬하기2 (#2751)
+시간 복잡도가 O(nlogn)인 알고리즘으로 해결하는 문제였다.
+
+O(n^2) 알고리즘은 버블 정렬이나 삽입 정렬로 간단하게 구현했었는데 이 경우에는 구현하기 보단 라이브러리에 있는 퀵소트를 사용했다.
+
+stdlib.h 헤더파일에 있는 qsort 함수는 자료형에 관계 없는 함수 포인터를 사용했다. (void*)
+
+정말 오랜만에 본 개념이라 헷갈렸다. void*로 compare 함수의 매개변수로 받고는 형 변환과 역참조를 통해 int 변수에 값을 저장한다.
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void* a,const void *b)  //const void*를 매개변수로 받는다!
+{
+    int num1 = *(int *)a;
+    int num2 = *(int *)b; //key point, 형 변환 + 역참조
+    if(num1<num2)
+        return -1;
+    if(num1>num2)
+        return 1;
+    return 0;
+}
+
+int main()
+{
+    int size=0;
+    scanf("%d",&size);
+
+    int num[size];
+    for(int i=0; i<size; i++)
+    {
+        scanf("%d",&num[i]);
+    }
+
+    qsort(num,sizeof(num)/sizeof(int),sizeof(int),compare);
+               //-> 크기가 정해진 int,double의 경우는 size 변수를 입력해도 되지만, 구조체를 쓰게 되는 경우를 대비해 sizeof 함수를 쓰는 것이 좋다.
+    for(int i=0; i<size; i++)
+    {
+        printf("%d\n",num[i]);
+    }
+}
+```
+## 나이순 정렬(#10814)
+stable sort는 언제 정렬해도 같은 값에 대해 똑같은 순서를 유지하는 정렬 알고리즘이다. (merge sort, bubble sort, insertion sort)
+
+기본적으로 나이순으로 정렬하고 나이가 같다면 배열에 추가된 순서대로 정렬하는 게 조건이었다. 우선 bubble sort로 구현해봤는데 시간 초과로 실패했다.
+
+퀵 소트는 stable sort가 아니어서 못하고 merge sort를 구현해야하는데 난이도가 높아서 일단 보류
+
+~~빨리 파이썬을 배워야겠다~~
+
+## Python 자료형 예제 정리
+```Python
+a=(1,2,3)
+a=a+(4,) 
+print(a)
+
+#tuple은 리스트와 유사하나 수정할 수 없다. 함수도 2개만 있음.
+#요소가 1개인 튜플을 만들 땐 쉼표를 붙인다.
+
+a=[1,1,1,2,2,3,3,3,4,4,5]
+aSet=set(a)
+b=list(aSet)
+print(b)
+
+#set 자료형은 중복 요소가 없다.
+#자료형을 변환 할땐 list(),tuple(),set() !!
+
+a=['Life','is','too','short']
+result=" ".join(a) 
+print(result)
+
+#join 함수를 통해 리스트를 문자열로 이동할 수 있다.
+```
+
+
