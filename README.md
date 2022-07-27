@@ -728,6 +728,127 @@ with open("newfile.txt",'a') as f:
 
 ```
 # 2022.07.26
+백준 단계별 문제 풀기 - 집합과 맵
 
+### 숫자 카드1 (#10815)
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void* a,const void* b)
+{
+    int num1=*(int*)a;
+    int num2=*(int*)b;
+
+    if (num1>num2)
+        return 1;
+    else if (num1<num2)
+        return -1;
+    else if (num1==num2)
+        return 0;
+}
+
+int main()
+{
+    int have_num; int* result;
+    scanf("%d",&have_num);
+    int have[have_num];
+    for(int i=0; i<have_num;i++)
+    {
+        scanf("%d",&have[i]);
+    }
+
+    int check_num;
+    scanf("%d",&check_num);
+    int check[check_num];
+    for(int i=0; i<check_num;i++)
+    {
+        scanf("%d",&check[i]);
+    }
+
+    qsort(have,sizeof(have)/sizeof(int),sizeof(int),compare);
+    //binary search를 위해서는 배열이 정렬되어 있어야 한다 !
+    //단순 대입(brute force)로 하면 시간 복잡도가 n^2이 된다.
+
+    for(int i=0;i<check_num;i++)
+    {
+        result=(int*)bsearch(&(check[i]),have,sizeof(have)/sizeof(int),sizeof(int),compare);
+        //bsearch(찾을 요소의 포인터,찾을 배열,배열의 크기,요소의 크기,compare 함수포인터)
+        //bsearch 함수는 void* 형태로 요소 값이 위치한 인덱스의 포인터를 반환한다.
+        if(result!=NULL)
+            check[i]=1;
+        else
+            check[i]=0;
+        
+        printf("%d ",check[i]);
+    }
+
+    return 0;
+}
+```
+처음에는 이중 for문으로 하나씩 검색했는데 시간 초과로 틀렸다.
+
+그래서 시간 복잡도가 적은 이진 탐색을 이용했고 이진 탐색을 이용하기 위해서는 탐색해야하는 배열이 정렬되어 있어야 했다.
+
+그래서 퀵소트 내장함수로 미리 정렬했다. 새로운 내장함수 bsearch를 이용해 볼 수 있었다.
+
+### 문자열 집합 - C(#14425)
+```c
+typedef struct {
+    char str[501];
+} String;
+
+    int sum=0;
+    int *result; char garbage;
+    qsort(string,set,sizeof(String),compare);
+
+    for(int i=0;i<search_n;i++)
+    {
+        result = (int*)bsearch(search[i].str,string,set,sizeof(String),compare);
+        if(result != NULL){
+            *string[i].str=garbage;
+            qsort(string,set,sizeof(String),compare);
+            sum++;
+        }
+    }
+    printf("%d\n",sum);
+```
+최대 인덱스가 500인 문자열을 구조체로 구현해서 숫자 카드 문제와 비슷하게 접근했다.
+
+하지만 탐색 값이 중복되는 걸 방지하기 위해서 이미 탐색된 값은 garbage 값을 대입하였는데,
+여기서 값이 바뀌면 다시 퀵소트로 정렬해야만 이진 탐색을 사용할 수 있었다.
+
+이진 탐색과 퀵 소트를 반복해서 사용하다보니 시간초과로 틀렸다. 중복 문제 해결에 대해 다시 생각해봐야겠다.
+
+### 문자열 집합 - Python (#14425)
+
+```python
+n,m = map(int,input().split())
+
+s1 = set() 
+s2 = set()
+
+for i in range(int(n)):
+    str = input()
+    s1.add(str)
+
+for j in range(int(m)):
+    str = input()
+    s2.add(str)
+
+l1 = list(s2)
+sum = 0
+for k in range(int(m)):
+    print(k)
+    if(l1[k] in s1):
+        sum = sum + 1
+
+print(sum)
+```
+한 줄에 두 개 이상의 입력을 받기 위해 map() 함수를 이용했다, map(받을 자료형,input(출력 텍스트),split())
+
+파이썬에는 집합 자료형과 관련 함수가 구현되어 있어 구현이 편했다.
+
+백준에서는 index error로 런타임 에러가 발생했는데 원인을 모르겠다......
 
 # 2022.07.27
