@@ -852,3 +852,33 @@ print(sum)
 백준에서는 index error로 런타임 에러가 발생했는데 원인을 모르겠다......
 
 # 2022.07.27
+* 문자열 집합 문제 마무리
+```Python
+n,m = map(int,input().split()) #한 줄에 2개 이상의 정수 받을 땐 map() 함수 이용
+
+s1 = set()
+l1 = []
+for i in range(n):
+    str = input()
+    s1.add(str)
+
+for j in range(m):
+    str = input()
+    l1.append(str)
+#  s2.add(str) # 저장하면 중복을 제거하기 때문에 index error
+
+sum = 0
+for k in range(m):
+    if(l1[k] in s1):
+        sum = sum + 1
+
+print(sum)
+```
+map() 함수로 값을 입력 받는데 그 크기가 너무 클 땐
+```Python
+import sys
+
+input = sys.stdin.readline
+
+n,m = map(int,input().split()) # or map(int,sys.stdin.readline().split())
+```
