@@ -462,7 +462,8 @@ t1 = tuple(s1) # 튜플로 변환, (1,2,3)
 
 # 2022.07.24
 Python 자료형 예제 정리 및 백준 단계별 풀어보기 정렬 문제 
-## 수 정렬하기1 (#2750)
+
+### 수 정렬하기1 (#2750)
 시간 복잡도가 O(n^2)인 알고리즘을 통해 정렬하는 문제.
 
 시간 복잡도가 n^2이므로 이중 루프를 사용한다. 안쪽 반복문에서 이웃 요소끼리 반복 비교와 스왑으로 가장 큰 수를 찾고 가장 큰 수가 뒤로 간다고 생각하면 된다.
@@ -503,7 +504,7 @@ int main()
     return 0;
 }
 ```
-## 수 정렬하기2 (#2751)
+### 수 정렬하기2 (#2751)
 시간 복잡도가 O(nlogn)인 알고리즘으로 해결하는 문제였다.
 
 O(n^2) 알고리즘은 버블 정렬이나 삽입 정렬로 간단하게 구현했었는데 이 경우에는 구현하기 보단 라이브러리에 있는 퀵소트를 사용했다.
@@ -546,7 +547,7 @@ int main()
     }
 }
 ```
-## 나이순 정렬(#10814)
+### 나이순 정렬(#10814)
 stable sort는 언제 정렬해도 같은 값에 대해 똑같은 순서를 유지하는 정렬 알고리즘이다. (merge sort, bubble sort, insertion sort)
 
 기본적으로 나이순으로 정렬하고 나이가 같다면 배열에 추가된 순서대로 정렬하는 게 조건이었다. 우선 bubble sort로 구현해봤는데 시간 초과로 실패했다.
@@ -579,4 +580,154 @@ print(result)
 #join 함수를 통해 리스트를 문자열로 이동할 수 있다.
 ```
 
+# 2022.07.25
+Python 제어문 (if,while,for)과 입출력 학습
 
+### 조건문 (if)
+1. if 조건문을 만들 때는 "if 조건문:" 아래로 속하는 문장에 대해 들여쓰기
+
+2. and,or,not 연산을 기호로 쓰지 않아도 됨
+```python
+money = 2000
+card = 1
+if money >= 3000 or card: #or
+    print("택시를 타고 가라")
+else:
+    print("걸어가라")  #택시를 타고 가라
+```
+3. 리스트,튜플,문자열과 같은 자료형에 대한 x in s, x not in s 조건문
+```python
+1 in [1,2,3] #True
+
+1 not [1,2,3] #True
+
+'a' in ('a','b','c')
+
+'j' not in 'python'
+```
+4. else if는 elif로 표현
+
+### 반복문 (while,for)
+1. while의 경우 조건문이 참인 동안 속한 문장들이 반복적으로 수행
+
+2. for의 경우 리스트나 튜플,문자열의 첫 번째 요소부터 마지막까지 차례대로 변수에 대입되어 속한 문장들을 반복적으로 수행
+```Python
+a=0
+while a < 10:
+    a += 1
+    if a % 2 ==0: continue
+    print(a)
+
+a = [(1,2),(3,4),(5,6)]
+for (first,last) in a:  #리스트 a의 숫자 쌍이 first,last에 대입
+    print(first + last) 
+```
+3. range 함수를 통해 for문에서의 범위를 설정
+```python
+sum = 0
+for i in range(1,11): #1부터 10까지 (시작 번호는 포함, 끝 번호는 미포함)
+    sum = sum + i
+ 
+ marks = [90,25,67,45,80]
+ for number in range(len(marks)): #0번 인덱스부터 4번 인덱스까지
+    if marks[number] < 60: continue
+    print("%d번 학생 합격입니다." % (number+1))
+```
+4. 리스트 안에 for문 포함하기
+```python
+a = [1,2,3,4]
+result = [num * 3 for num in a]
+print(result)
+#[3,6,9,12]
+
+result = [num * 3 for num in a if num % 2 ==0] #if 조건을 추가할 수도 있음.
+print(result)
+# [6,12]
+```
+
+### 프로그램의 입출력
+* 함수의 입력
+1. 입력값의 갯수 정해져 있을 땐 매개변수를 통해 입력 받는다.
+
+2. 입력값의 갯수가 정해져 있지 않다면 *args를 이용한다.
+```python
+def sum_many(*args) #입력 변수에 *을 붙이면 입력값을 전부 모아 튜플로 만든다.
+    sum = 0
+    for i in args:
+        sum = sum + i
+    return sum
+result = sum_many(1,2,3) args=(1,2,3) 튜플
+print(result) #6
+```
+3. 입력 인수에 초깃값을 미리 설정해서 자바의 method overloading 처럼 쓸 수도 있다.
+```python
+def say_myself(name,old,man = True): #초깃값을 미리 설정할 입력 변수는 항상 뒤쪽에 위치시켜야 함.
+    print("나의 이름은 %s입니다." % name)
+    print("나이는 %d살입니다." % old)
+    if man:
+        print("남자입니다.")
+    else:
+        print("여자입니다.")
+
+say_myself("박응용",27)
+say_myself("박응용",27,True) #두 호출문 모두 똑같은 결과
+```
+* 사용자 입출력
+1. 사용자가 입력한 값을 변수에 대입하기 위해서는 input() 함수를 사용한다.
+
+2. input에 입력되는 모든 것은 문자열로 취급된다.
+
+3. 출력을 하기 위해서는 print()함수를 사용한다.
+  
+  3-1. 큰 따옴표로 둘러싸인 문자열은 + 연산과 동일
+  
+  3-2. 문자열 띄어 쓰기는 콤마로 한다.
+```python
+print("life""is""too short") #lifeistoo short
+print("life" + "is" + "too" + "short") #lifeistoo short
+
+print("life","is","too short") #life is too short
+
+for i in range(10):
+    print(i, end=' ')
+    # 0 1 2 3 4 5 6 7 8 9
+```
+* 파일 입출력
+1. 파일 열기 모드에는 3가지가 있다.
+
+    1-1. f = open("newfile.txt",'w'), 쓰기 모드 write, 파일을 생성 후 첫 내용을 쓸 때
+    
+    1-2. f = open("newfile.txt",'r'), 읽기 모드 read, 파일을 읽기만 할 때
+    
+    1-3. f = open("newfile.txt",'a'), 추가 모드 append, 파일의 마지막에 새로운 내용을 추가할 때
+    
+2. with 문을 사용하면 with 블록을 벗어나는 순간 파일 객체 f가 자동으로 close 된다.
+```python
+f = open("newfile.txt",'w')
+for i in range(1,11):
+    data = "%d line\n" % i
+    f.write(data) #파일 입력 ('w)
+f.close() # 열린 파일은 직접 닫는 것이 좋다.
+
+f = open("newfile.txt",'r') 
+line = f.read() #모든 라인을 문자열로 출력 ('r')
+#line = f.readline() , 한 라인만 출력
+#line = f.readlines(), 모든 라인을 리스트로 출력
+print(line)
+f.close()
+ 
+f = open("newfile.txt",'a') #파일에 추가 입력 ('a')
+for i in range(11,20):
+    data = "%d line\n" % i
+    f.write(data)
+f.close
+
+with open("newfile.txt",'a') as f:
+    f.write("Life is too short, you need Python")
+# with문으로 자동으로 f.close()를 실행 할수도 있다.
+
+```
+# 2022.07.26
+
+
+# 2022.07.27
