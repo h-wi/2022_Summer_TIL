@@ -882,3 +882,23 @@ input = sys.stdin.readline
 
 n,m = map(int,input().split()) # or map(int,sys.stdin.readline().split())
 ```
+# 2022.08.01 
+백준 단계별 문제풀기 및 파이썬 5장 학습
+
+### 나이순 정렬(#10814) - Python
+파이썬 중첩 리스트와 람다식으로 구현해보았다. C언어로 구현할때보다 코드 길이도 짧고 편했다.
+
+```Python
+n = int(input())
+l1 = []
+for i in range(n):
+    age,name = map(str, input().split()) #map으로 두 입력값을 str로 받기 int과 str로 받을순 없나ㅣ?
+    l1.append([int(age),i,name]) # age를 int로 형변환 하지 않았더니 에러가 떴었다
+l1.sort(key=lambda x: (x[0],x[1])) # 이차원 이상의 배열에서 람다식을 이용한 sort() 함수 사용 -> 각 리스트의 0번째 인덱스를 기준으로 정렬한 다음, 같은 값에 대해 1번째 인덱스로 정렬
+for i in range(n):
+    print("%s %s" % (l1[i][0],l1[i][2]))
+```
+### 파이썬과 클래스
+
+* self, 인스턴스
+* __init__, 생성자
