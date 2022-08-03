@@ -926,6 +926,7 @@ class FourCal:
 a = FourCal(4,2)
 a.first() # = 4
 ```
+
 * 상속 , 오버라이딩
 ```python
  class MoreFourCal(FourCal): # 상속은 클래스 이름 뒤에 괄호를 이용한다.
@@ -939,6 +940,7 @@ a.first() # = 4
          else:
             return self.first/self.second
 ```
+
 * 클래스 변수 
 ```python
 class Family:
@@ -954,4 +956,162 @@ print(b.lastname) # 김
 print(Family.lastname) #김
 ```
 
+# 2022.08.02
 
+### 파이썬의 모듈, 패키지
+
+* 모듈
+
+모듈 : 함수나 변수, 클래스를 모아놓은 파일, 모든 .py파일
+
+```python
+# mod1.py
+
+PI = 3.141592
+
+class Math:
+    def solv(self,r):
+        return PI * (r ** 2)
+def add(a, b):
+    return a+b
+
+def sub(a,b):
+    return a-b
+```
+
+* 모듈 불러오기
+
+모듈을 불러오기 위해서는 호출 파일과 피호출 파일이 같은 디렉토리에 있어야 한다.
+```python
+import mod1 #import 모듈이름
+print(mod1.add(3,4)) #7
+print(mod1.sub(4,2)) #2
+
+from mod1 import add # 모듈 이름 없이 임의의 함수를 이름만 쓰고 싶을때
+from mod1 import * # import 내의 모든 함수를 이름만 쓰고 싶을때
+
+add(3,4) #7
+sub(4,2) #2
+
+print(mod1.PI) #3.141592
+
+a = mod1.Math()
+
+print(a.solv(2)) #12.566..
+
+```
+변수와 클래스 또한 사용할 수 있다
+
+* if name == "main": 의미
+
+mod1 모듈에 실행문이 있으면 모듈이 import 될때 마다 실행된다.
+
+이러한 문제를 방지하기 위해 실행문을 if name == "main"안에 배치하여야 한다.
+
+```python
+# mod1.py 
+def add(a, b): 
+    return a+b
+
+def sub(a, b): 
+    return a-b
+
+if __name__ == "__main__":
+    print(add(1, 4))
+    print(sub(4, 2))
+```
+
+* 패키지
+
+패키지 = 파이썬 모듈을 계층적으로 관리. (디렉터리 구조)
+
+* 패키지 생성과 실행
+
+```python
+C:/doit/game/__init__.py
+C:/doit/game/sound/__init__.py
+C:/doit/game/sound/echo.py
+C:/doit/game/graphic/__init__.py
+C:/doit/game/graphic/render.py
+```
+
+각 디렉터리에 init.py파일을 만들어만 놓기
+
+```python
+# echo.py
+def echo_test():
+    print("echo")
+    
+# render.py
+def render_test():
+    print("render")
+    
+# 패키지 안의 함수 실행 방법 첫번째
+import game.sound.echo
+game.sound.echo.echo.test() # echo
+
+#두번째
+from game.sound import echo 
+echo.echo.test() # echo, game.sound는 생략
+
+#세번째
+from game.sound.echo import echo_test()
+echo.test() #echo 파일까지 생략
+```
+
+디렉토리를 import할 때, 
+
+1. init.py 파일에 정의되어 있지 않은 모듈이나 패키지를 호출하거나
+
+2. import 마지막 항목을 모듈이나 패키지로 호출하지 않은 경우는
+
+패키지 내부의 함수를 호출할 수 없다.
+
+```python
+# 안되는 경우
+
+import game
+game.sound.echo.echo_test()
+
+#game 파일을 import하면 game 파일의 init.py에 정의한 것만 참조 할 수 있음.
+
+import game.sound.echo.echo_test # import를 사용할 때 마지막 항목은 모듈 or 패키지여야 한다.
+
+```
+
+* init.py의 용도
+
+해당 디렉토리가 패키지의 일부임을 나타내는 역할. 이 파일이 없으면 패키지로 인식되지 않는다.
+
+```python
+# C:/doit/game/sound/__init__.py
+__all__ = ['echo']
+```
+
+init.py 파일 내부에는 all 변수를 선언한 뒤 import 할 수 있는 모듈들을 정의해 주어야 한다.
+
+sound 디렉토리에서 별 표시를 이용하여 전체를 import할 경우 이곳에 정의되어 있는 echo 모듈만 import할 수 있다는 의미가 된다.
+
+<hr/>
+※ 모듈에 대해서 별 표시로 import할 경우에는 all 변수와 상관없이 모든 함수를 사용할 수 있다.
+<hr/>
+
+* relative 접근자
+
+.. - 부모 디렉토리에 접근
+. - 현재 디렉토리에 접근
+
+```python
+# render.py
+from game.sound.echo import echo_test # relative하지 않게 
+def render_test():
+    print("render")
+    echo_test()
+    
+# render.py
+from ..sound.echo import echo_test #render.py의 부모 디렉토리인 game에 접근한 후 sound.echo로 접근하여 import
+
+def render_test():
+    print("render")
+    echo_test()
+```
