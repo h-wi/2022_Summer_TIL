@@ -901,4 +901,57 @@ for i in range(n):
 ### 파이썬과 클래스
 
 * self, 인스턴스
+```Python
+class FourCal:
+    #일시적으로 아무것도 안쓸 땐 pass를 쓴다.
+     def setdata(self, first, second): #메소드의 첫번째 매개변수는 관례적으로 self를 사용한다.
+         self.first = first #self = 어떤 객체의 이름
+         self.second = second
+         
+a = FourCal()
+a.setdata(4,2) #매개변수를 2개만 입력해도 객체 a가 자동으로 self에 입력된다.
+```
+![image](https://user-images.githubusercontent.com/108285793/182524490-f32890af-abb9-4220-9b35-3910b4d8ba0c.png)
+
+
 * __init__, 생성자
+
+init 메소드를 사용하면 생성자처럼 사용할 수 있다.
+```python
+class FourCal:
+     def __init__(self, first, second): 
+         self.first = first 
+         self.second = second
+         
+a = FourCal(4,2)
+a.first() # = 4
+```
+* 상속 , 오버라이딩
+```python
+ class MoreFourCal(FourCal): # 상속은 클래스 이름 뒤에 괄호를 이용한다.
+     def pow(self):
+         result = self.first ** self.second
+         return result
+         
+     def div(self):      #FourCal 클래스의 div 메소드를 오버라이딩
+         if self.second = 0:
+            return 0
+         else:
+            return self.first/self.second
+```
+* 클래스 변수 
+```python
+class Family:
+    lastname = "김"
+
+a = Family()
+b = Family()
+
+a.lastname = "최"
+
+print(a.lastname) # 최
+print(b.lastname) # 김
+print(Family.lastname) #김
+```
+
+
