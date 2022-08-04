@@ -1198,4 +1198,19 @@ eagle = Eagle()
 eagle.fly()  #very fast
 ```
 
-### 내장함수와 
+### 내장함수와 라이브러리
+
+![image](https://user-images.githubusercontent.com/108285793/182750599-f2032cee-2eda-4e99-8b4f-51f661c482d9.png)
+![image](https://user-images.githubusercontent.com/108285793/182750620-50381379-aa36-47e5-af39-b4ddb76da1d8.png)
+* filter
+
+![image](https://user-images.githubusercontent.com/108285793/182750772-822c8989-4f24-4ea0-bf68-176fac906251.png)
+![image](https://user-images.githubusercontent.com/108285793/182750859-fabf644a-0f55-4087-9083-d48035e9828a.png)
+```python
+list(map(lambda a: a*2, [1, 2, 3, 4]))
+# [2, 4, 6, 8] 따로 클래스를 만들지 않고도 람다식을 통해 표현할 수 있다.
+```
+![image](https://user-images.githubusercontent.com/108285793/182750982-069beaf6-9cb4-4725-b804-b9f502fb8a1f.png)
+![image](https://user-images.githubusercontent.com/108285793/182751049-98ec0b85-7d63-4d7a-8b77-19ab11e91913.png)
+
+
