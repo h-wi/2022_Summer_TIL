@@ -1115,3 +1115,87 @@ def render_test():
     print("render")
     echo_test()
 ```
+
+# 2022.08.04
+
+파이썬 예외처리 방법, 유용한 내장함수와 라이브러리, 연습문제
+
+### 파이썬 예외처리
+
+* try ... except
+
+except문은 try 블럭에서 오류가 발생했을 때 오류를 처리하는 블럭이다.
+```python
+try:
+    ...
+except:
+    ... # 오류의 종류와 관계없이 오류가 발생하면 예외 처리
+
+except 발생오류(ZeroDivisionError):
+    ... # zero division 오류가 발생한 경우에만 예외 처리
+```
+* try ... finally
+
+finally절은 오류 발생 여부와 상관없이 항상 실행된다. 파일 리소스를 close할 때 주로 사용.
+```python
+f = open('foo.txt', 'w')
+try:
+    # 무언가를 수행한다.
+finally:
+    f.close()
+```
+
+여러 개의 오류를 처리할 땐 except절의 우선순위는 없음
+
+같은 예외 처리를 위해 괄호로 묶어 나타낼 수도 있다.
+
+```python
+try:
+    a = [1,2]
+    print(a[3])
+    4/0
+except ZeroDivisionError as e:
+    print(e)
+except IndexError as e: #index error가 먼저 발생
+    print(e)
+    
+try:
+    a = [1,2]
+    print(a[3])
+    4/0
+except (ZeroDivisionError, IndexError) as e:
+    print(e)
+```
+* try ... [except] ... else
+
+try 블럭에서 오류가 발생하지 않을 경우에 실행되는 else문도 있다.
+```python
+try:
+    age=int(input('나이를 입력하세요: '))
+except:
+    print('입력이 정확하지 않습니다.')
+else:
+    if age <= 18:
+        print('미성년자는 출입금지입니다.')
+    else:
+        print('환영합니다.')
+```
+
+* 오류를 발생시키는 raise 명령어
+
+파이썬은 raise 명령어를 사용해 오류를 강제로 발생시킬 수 있다.
+
+```python
+class Bird:
+    def fly(self):
+        raise NotImplementedError # 파이썬 내장함수, 함수를 구현하지 않고 일부러 오류를 발생할 때 사용한다.
+        
+class Eagle(Bird):
+    def fly(self):
+        print("very fast")
+
+eagle = Eagle()
+eagle.fly()  #very fast
+```
+
+### 내장함수와 
