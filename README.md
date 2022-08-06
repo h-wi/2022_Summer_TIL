@@ -1214,3 +1214,57 @@ list(map(lambda a: a*2, [1, 2, 3, 4]))
 ![image](https://user-images.githubusercontent.com/108285793/182751049-98ec0b85-7d63-4d7a-8b77-19ab11e91913.png)
 
 
+# 2022.08.06
+파이썬 교재 6장 연습문제
+
+### 문자열 압축하기
+```python
+n = list(input())
+n.append('none') #마지막 요소에 garbage value를 추가해서 index error를 방지
+s1 = ''
+sum = 1 #문자는 1개 이상 주어지기 때문에 초깃값은 1
+for i in range(len(n)-1): 
+    if(n[i] == n[i+1]): #이웃 요소끼리 비교해서 같을 때만 카운트
+        sum += 1
+    else: # 다르면 i번째 요소의 문자와 sum을 s1 문자열에 업데이트 후
+        s1 = s1 + n[i] + str(sum) 
+        sum = 1 # 다시 초깃값을 설정
+print(s1)
+```
+
+### Duplicated Numbers
+```python
+l = list(map(str,input().split()))
+for i in range(len(l)):
+
+    check = [0,1,2,3,4,5,6,7,8,9]
+    duplicated = False #중복되게 remove했는지 확인
+    l1 = list(l[i]) #문자열로 받았기 때문에 리스트로 변환
+
+    for j in range(len(l1)):
+        try:
+            check.remove(int(l1[j])) #중복되는 경우 value error 발생함
+        except:
+            duplicated = True 
+
+    if not check and not duplicated: #check list가 비어있고 duplicated가 false일 경우
+        l[i] = 'true'
+    else:
+        l[i] = 'false'
+print(' '.join(l))
+```
+
+### 모스 부호 해독
+```python
+str = input().split('  ') #공백 2개를 기준으로 인덱스 나누기
+for i in range(len(str)):
+    str[i]=list(str[i].split(' ')) #공백 1개를 기준으로 중첩 문자열 내부의 인덱스 구분으로 문자를 1개씩 분리
+for i in range(len(str)):
+    for j in range(len(str[i])):  #이중 중첩문과 조건문으로 리스트 내부를 알파벳으로 바꾸기
+        if str[i][j] == '.-':
+            str[i][j] = 'A'
+        elif str[i][j] == '-...':
+            str[i][j] = 'B'  # A,B ~ Z
+        print('%c' % str[i][j], end = '') #줄이 바뀌지 않도록 end = ' '를 추가해준다
+    print('', end = ' ')
+```
