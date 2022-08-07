@@ -1268,3 +1268,8 @@ for i in range(len(str)):
         print('%c' % str[i][j], end = '') #줄이 바뀌지 않도록 end = ' '를 추가해준다
     print('', end = ' ')
 ```
+
+# 2022.08.07
+7장 파이썬 정규 표현식과 XML
+
+
