@@ -1307,4 +1307,54 @@ abc # a와 b 사이에 아무 문자도 없으므로 매치 X
 
 물음표 표시는 {m,n}으로 표시하면 {0,1}, 별 표시와 더하기 표시의 교집합이다.
 
+# 2022.08.09
+백준 단계별 문제 풀이 (그리디 알고리즘, 스택)
+
+### 동전 0 (#11047)
+```python
+n,k = map(int, input().split())
+coin = []
+for i in range(n):
+    type = input()
+    coin.append(int(type))
+coin.reverse()
+count = 0
+for j in range(n):
+    while coin[j] <= k:
+        count +=  k // coin[j]  #빼기로 하면 틀린다!!
+        k %= coin[j]
+print(count) 
+```
+
+### 스택 (#10828)
+
+```python
+n = int(input())
+l1 = []
+result = []
+for i in range(n):
+    do = input()
+    c = do.split(' ')[0]
+    if c == 'push':
+        l1.append(do.split(' ')[1])
+    elif c == 'pop':
+        try:
+            result.append(l1.pop())
+        except:
+            result.append('-1')
+    elif c == 'size':
+        result.append(len(l1))
+    elif c == 'empty':
+        if len(l1) == 0:
+            result.append('1')
+        else:
+            result.append('0')
+    elif c == 'top':
+        try:
+            result.append(l1[len(l1)-1])
+        except:
+            result.append('-1')
+for j in range(len(result)):
+    print(result[j])
+```
 
