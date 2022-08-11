@@ -1358,3 +1358,42 @@ for j in range(len(result)):
     print(result[j])
 ```
 
+# 2022.08.11 
+백준 단계별 문제풀이 큐(Queue)
+
+### 큐2 (#18258)
+```python
+import sys
+from collections import deque 
+
+n = int(sys.stdin.readline()) #input()으로 받는것보다 빠르고 많은 양을 받을 수 있다.
+l1 = deque([]) 
+for i in range(n):
+    do = sys.stdin.readline().split() #split()은 시간복잡도에 큰 영향을 끼치진 않는듯?
+    if do[0] == 'push':
+        l1.append(do[1]) #append() = O(1)
+    elif do[0] == 'pop':
+        if not l1:
+            print('-1')
+        else:
+            print(l1.popleft()) #deque로 선언하면 맨 왼쪽요소를 pop할수 있음 = O(1)
+                                #일반 리스트로 선언하여 pop(0)을 하게 되면 나머지 인덱스 요소를 앞으로 붙여야하므로
+                                 시간 복잡도가 O(n)이 된다.
+    elif do[0] == 'size':
+        print(len(l1)) 
+    elif do[0] == 'empty':
+        if len(l1) == 0: 
+            print('1')
+        else:
+            print('0')
+    elif do[0] == 'front':
+        try:
+            print(l1[0]) #배열로의 접근 = 
+        except:
+            print('-1')
+    elif do[0] == 'back':
+        try:
+            print(l1[len(l1)-1])
+        except:
+            print('-1')
+```
