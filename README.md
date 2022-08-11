@@ -1378,7 +1378,7 @@ for i in range(n):
         else:
             print(l1.popleft()) #deque로 선언하면 맨 왼쪽요소를 pop할수 있음 = O(1)
                                 #일반 리스트로 선언하여 pop(0)을 하게 되면 나머지 인덱스 요소를 앞으로 붙여야하므로
-                                 시간 복잡도가 O(n)이 된다.
+                                #시간 복잡도가 O(n)이 된다.
     elif do[0] == 'size':
         print(len(l1)) 
     elif do[0] == 'empty':
@@ -1388,7 +1388,7 @@ for i in range(n):
             print('0')
     elif do[0] == 'front':
         try:
-            print(l1[0]) #배열로의 접근 = 
+            print(l1[0]) #배열로의 접근 = O(1)
         except:
             print('-1')
     elif do[0] == 'back':
