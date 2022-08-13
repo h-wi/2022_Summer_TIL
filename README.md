@@ -1419,3 +1419,5 @@ for i in range(m):
 https://velog.io/@ready2start/Python-%EC%84%B8%ED%8A%B8set%EC%9D%98-%EC%8B%9C%EA%B0%84-%EB%B3%B5%EC%9E%A1%EB%8F%84
 
 이진탐색을 사용하진 않았지만 파이썬에선 집합이라는 자료형으로 O(1)의 탐색이 가능하다!
+
+하지만 집합은 중복되는 수를 입력할 수 없기 때문에 한계가 있음 (숫자카드 2 문제 참고)
