@@ -1397,3 +1397,25 @@ for i in range(n):
         except:
             print('-1')
 ```
+
+# 2022.08.13
+백준 단계별 문제풀기 이진탐색
+
+### 수 찾기 (#1920)
+```python
+n = int(input())
+num_set = set(map(int,input().split()))
+m = int(input())
+check = list(map(int,input().split()))
+
+for i in range(m):
+    if check[i] in num_set:
+        check[i] = 1
+    else:
+        check[i] = 0
+    print(check[i])
+```
+
+https://velog.io/@ready2start/Python-%EC%84%B8%ED%8A%B8set%EC%9D%98-%EC%8B%9C%EA%B0%84-%EB%B3%B5%EC%9E%A1%EB%8F%84
+
+이진탐색을 사용하진 않았지만 파이썬에선 집합이라는 자료형으로 O(1)의 탐색이 가능하다!
