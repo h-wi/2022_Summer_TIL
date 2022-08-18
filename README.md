@@ -1425,7 +1425,7 @@ https://velog.io/@ready2start/Python-%EC%84%B8%ED%8A%B8set%EC%9D%98-%EC%8B%9C%EA
 # 2022.08.14
 백준 단계별 문제풀기 이진탐색 
 
-### 수 찾기2 (#10816)
+### 숫자카드2 (#10816)
 ```python
 def binary_search(arr,target,start,end): #binary search에서 중복 횟수를 찾으면 시간초과
     while start <= end:                  #lst에 요소가 있는지만 체크, 중복횟수는 해쉬를 이용
@@ -1459,9 +1459,17 @@ for i in range(m):
         print(0, end = ' ')
 ```
 
+집합이나 해쉬는 중복된 key를 가질 수 없기 때문에 수찾기 문제처럼 풀 수 없었다.
+
+중복된 횟수를 미리 저장한 해쉬와 이진탐색을 이용하는 문제.
+
 # 2022.08.15
 
 우선순위 큐 (최대힙,최소힙) 자료구조 복습 및 코드 구현
+
+라이브러리를 사용해서 풀기 전에 미리 코드를 구현해보았다.
+
+### 최대 힙 구현(
 ```python
 class maxheap():
     lst = [0] # max는 1번째 인덱스여야한다 (나눗셈 몫 사용)
@@ -1574,6 +1582,6 @@ for i in range(n):
         print(heapq.heappop(max)[1])
       elif len(min) != 0 and len(max) == 0:
         print(heapq.heappop(min))
-      else: # 둘다 비어있으면 0을 
+      else: # 둘다 비어있으면 0을
         print(0)
 ```
