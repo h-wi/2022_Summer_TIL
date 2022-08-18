@@ -1469,7 +1469,7 @@ for i in range(m):
 
 라이브러리를 사용해서 풀기 전에 미리 코드를 구현해보았다.
 
-### 최대 힙 구현(
+### 최대 힙 구현(python)
 ```python
 class maxheap():
     lst = [0] # max는 1번째 인덱스여야한다 (나눗셈 몫 사용)
@@ -1582,6 +1582,6 @@ for i in range(n):
         print(heapq.heappop(max)[1])
       elif len(min) != 0 and len(max) == 0:
         print(heapq.heappop(min))
-      else: # 둘다 비어있으면 0을
+      else: # 둘다 비어있으면 0을 출력.
         print(0)
 ```
