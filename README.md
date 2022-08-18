@@ -1421,3 +1421,40 @@ https://velog.io/@ready2start/Python-%EC%84%B8%ED%8A%B8set%EC%9D%98-%EC%8B%9C%EA
 이진탐색을 사용하진 않았지만 파이썬에선 집합이라는 자료형으로 O(1)의 탐색이 가능하다!
 
 하지만 집합은 중복되는 수를 입력할 수 없기 때문에 한계가 있음 (숫자카드 2 문제 참고)
+
+# 2022.08.14
+백준 단계별 문제풀기 이진탐색
+
+### 수 찾기2 (#10816)
+```python
+def binary_search(arr,target,start,end): #binary search에서 중복 횟수를 찾으면 시간초과
+    while start <= end:                  #lst에 요소가 있는지만 체크, 중복횟수는 해쉬를 이용
+        mid = (start + end) // 2
+        if arr[mid] == target:
+            return hash[target]
+        elif arr[mid] < target:
+            start = mid + 1
+        else:
+            end = mid - 1
+ 
+n = int(input())
+lst = list(map(int,input().split()))
+m = int(input())
+check = list(map(int,input().split()))
+
+hash = {} #dictionary를 이용해서 얼마나 중복됐는지 미리 저장 
+
+for i in lst:
+    if i in hash:
+        hash[i] += 1
+    else:
+        hash[i] = 1 #10은 3번..5는 2번 etc..
+
+lst.sort()
+for i in range(m):
+    result = binary_search(lst,check[i],0,n-1)
+    if result:
+        print(result, end = ' ')
+    else:
+        print(0, end = ' ')
+```
