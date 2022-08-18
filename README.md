@@ -1423,7 +1423,7 @@ https://velog.io/@ready2start/Python-%EC%84%B8%ED%8A%B8set%EC%9D%98-%EC%8B%9C%EA
 하지만 집합은 중복되는 수를 입력할 수 없기 때문에 한계가 있음 (숫자카드 2 문제 참고)
 
 # 2022.08.14
-백준 단계별 문제풀기 이진탐색
+백준 단계별 문제풀기 이진탐색 
 
 ### 수 찾기2 (#10816)
 ```python
@@ -1457,4 +1457,123 @@ for i in range(m):
         print(result, end = ' ')
     else:
         print(0, end = ' ')
+```
+
+# 2022.08.15
+
+우선순위 큐 (최대힙,최소힙) 자료구조 복습 및 코드 구현
+```python
+class maxheap():
+    lst = [0] # max는 1번째 인덱스여야한다 (나눗셈 몫 사용)
+
+    def heap_insert(self,data):
+        self.lst.append(data)
+        i = len(self.lst) - 1   #추가 된 노드의 인덱스
+        while((i != 1) and (data > self.lst[i//2])):
+            self.lst[i] = self.lst[i//2] # 부모 노드의 인덱스는 자식 인덱스를 2로나눈 몫
+            i = i // 2
+        self.lst[i] = data
+
+    def heap_delete(self):
+        if len(self.lst) == 1: # heap이 empty하면 0을 반환
+            return 0
+        res = self.lst[1] # 최고값 저장
+        tmp = self.lst[len(self.lst)-1] # pop하여 마지막 값을 저장
+        parent = 1 # 부모 : 0번 인덱스
+        child = 2 # 자식 : 1번,2번 인덱스
+
+        while (child <= len(self.lst)-1):
+            if((child< len(self.lst)-1) and self.lst[child]<self.lst[child+1]):
+                child += 1 #child가 힙의 범위 안 and "오른쪽 자식이 더 크면"
+            if (tmp >= self.lst[child]):
+                break
+            self.lst[parent] = self.lst[child]
+            parent = child #더 밑으로 가서 탐색
+            child *= 2
+        self.lst[parent] = tmp
+        self.lst.pop()
+        return res
+
+n = int(input())
+heap = maxheap()
+result = []
+for i in range(n):
+    data = int(input())
+    if data:
+        heap.heap_insert(data)
+    else:
+        print(heap.heap_delete())
+```
+
+# 2022.08.16
+
+백준 단계별 풀어보기 우선순위 큐 문제 풀이
+
+### 최대 힙 (#11279)
+```python
+import sys
+import heapq
+
+n = int(input())
+max_heap = []
+for i in range(n):
+    num = int(sys.stdin.readline()) 
+     #입력되는 자연수의 값이 너무 클땐 sys 모듈의 readline 함수 사용하기
+    if num:
+        heapq.heappush(max_heap,(-num,num)) 
+        # heapq 모듈은 minheap만 구현됨, 튜플 형태로 마이너스 부호로 해싱하여 반대로                                
+    elif len(max_heap) == 0:
+        print(0)
+    else: 
+        print(heapq.heappop(max_heap)[1]
+```
+
+### 최소 힙 (#1927)
+```python
+import sys
+import heapq
+
+n = int(input())
+min_heap = []
+for i in range(n):
+    num = int(sys.stdin.readline())
+    if num:
+        heapq.heappush(min_heap,num)
+    else:
+        try:
+            print(heapq.heappop(min_heap))
+        except:
+            print(0)
+```
+
+### 절댓값 힙 (#11286)
+```python
+import sys
+import heapq
+
+max = [] #음수를 저장할 힙
+min = [] #양수를 저장할 힙
+n = int(input())
+for i in range(n):
+  num = int(sys.stdin.readline())
+  if num > 0:
+    heapq.heappush(min,num)
+  elif num < 0:
+    heapq.heappush(max,(-num,num))
+  else:
+    try:
+      min_item = min[0]
+      max_item = max[0][1]
+
+      if min_item < abs(max_item): #절댓값이 더 작은 걸 출력
+        print(heapq.heappop(min))
+      else:
+        print(heapq.heappop(max)[1])
+    except IndexError:
+      if len(min) == 0 and len(max) != 0: #두 힙 중에 하나라도 비어있다면 다른 힙에서 무조건 출력
+        print(heapq.heappop(max)[1])
+      elif len(min) != 0 and len(max) == 0:
+        print(heapq.heappop(min))
+      else: # 둘다 비어있으면 0을 
+        print(0)
 ```
